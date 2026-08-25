@@ -1,0 +1,6 @@
+.npm-cache/
+concept-site/node_modules/
+concept-site/.next/
+concept-site/.vinext/
+*.log
+Thumbs.db
