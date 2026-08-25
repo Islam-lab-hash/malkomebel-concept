@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { legacyNav, legacyFooter } from './legacy-nav.mjs';
 
 const root = 'C:/Users/1/Desktop/MalkoMebel_Concept';
 const preview = path.join(root, 'concept-site', 'preview');
@@ -12,8 +13,8 @@ const esc = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 
-const nav = (prefix = './') => `<header class="site-head"><a class="brand" href="${prefix}">МАЛКО<span>МЕБЕЛЬ</span></a><button class="menu" aria-label="Открыть меню">Меню <i></i></button><nav><a href="${prefix}catalog.html">Каталог</a><a href="${prefix}materials.html">Материалы</a><a href="${prefix}services.html">Услуги</a><a href="${prefix}prices.html">Цены</a><a href="${prefix}archive.html">Все страницы</a><a href="${prefix}contacts.html">Контакты</a></nav><a class="phone" href="tel:+79185106999">+7 (918) 510-69-99</a></header>`;
-const footer = (prefix = './') => `<footer><span>© Малко-Мебель 2013–2026</span><span>Мебель на заказ в Ростове-на-Дону · <a href="${prefix}privacy.html">Политика</a></span></footer>`;
+const nav = (prefix = './') => legacyNav(prefix);
+const footer = (prefix = './') => legacyFooter(prefix);
 const imageFor = (url = '', title = '') => {
   const value = `${url} ${title}`.toLowerCase();
   if (value.includes('кух') || value.includes('фасад')) return '/images/source/kitchen.jpg';
