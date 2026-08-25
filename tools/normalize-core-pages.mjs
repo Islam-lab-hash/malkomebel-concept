@@ -10,6 +10,7 @@ for (const name of files) {
   html = html.replace(/<nav>[\s\S]*?<\/nav>/, nav);
   html = html.replace(/(<a class="brand"[^>]*>)<button class="menu"[^>]*>Меню <i><\/i><\/button>/, '$1');
   if (!html.includes('class="menu"')) html = html.replace(/(<a class="brand"[^>]*>.*?<\/a>)/s, '$1<button class="menu" aria-label="Открыть меню">Меню <i></i></button>');
+  html = html.replaceAll('href="/', 'href="./').replaceAll('src="/', 'src="./');
   if (!html.includes('<script src="/app.js"></script>')) html = html.replace('</body>', '<script src="/app.js"></script></body>');
   fs.writeFileSync(file, html);
 }
