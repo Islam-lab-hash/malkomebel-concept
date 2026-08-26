@@ -100,4 +100,28 @@
       toggleColor();
     });
   });
+
+  const directionPanels = [...document.querySelectorAll('.direction-panel, .home-intro-media')];
+  directionPanels.forEach((panel) => {
+    const image = panel.querySelector('img');
+    if (!image) return;
+    panel.tabIndex = 0;
+    panel.setAttribute('role', 'button');
+    panel.setAttribute('aria-pressed', 'false');
+    image.dataset.monoSrc = image.getAttribute('src');
+    image.dataset.colorSrc = image.dataset.monoSrc.replace('/enhanced/', '/');
+
+    const toggleColor = () => {
+      const color = panel.classList.toggle('is-color');
+      image.src = color ? image.dataset.colorSrc : image.dataset.monoSrc;
+      panel.setAttribute('aria-pressed', String(color));
+    };
+
+    panel.addEventListener('click', toggleColor);
+    panel.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      toggleColor();
+    });
+  });
 })();
