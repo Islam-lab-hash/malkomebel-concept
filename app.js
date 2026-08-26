@@ -76,4 +76,28 @@
       syncCallbackTime();
     });
   }
+
+  const catalogCards = [...document.querySelectorAll('.home-card')];
+  catalogCards.forEach((card) => {
+    const image = card.querySelector('img');
+    if (!image) return;
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-pressed', 'false');
+    image.dataset.monoSrc = image.getAttribute('src');
+    image.dataset.colorSrc = image.dataset.monoSrc.replace('/enhanced/', '/');
+
+    const toggleColor = () => {
+      const color = card.classList.toggle('is-color');
+      image.src = color ? image.dataset.colorSrc : image.dataset.monoSrc;
+      card.setAttribute('aria-pressed', String(color));
+    };
+
+    card.addEventListener('click', toggleColor);
+    card.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      toggleColor();
+    });
+  });
 })();
