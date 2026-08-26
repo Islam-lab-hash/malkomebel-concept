@@ -10,7 +10,7 @@ for (const name of files) {
   html = html.replace(/<header class="site-head">[\s\S]*?<\/header>/, legacyNav('./'));
   html = html.replace(/<footer>[\s\S]*?<\/footer>/, legacyFooter('./'));
   html = html.replaceAll('href="/', 'href="./').replaceAll('src="/', 'src="./');
-  html = html.replaceAll('<script src="/app.js"></script>', '');
+  html = html.replace(/<script src="(?:\.?\/)+app\.js"><\/script>/g, '');
   if (!html.includes('<script src="./app.js"></script>')) html = html.replace('</body>', '<script src="./app.js"></script></body>');
   fs.writeFileSync(file, html);
 }
